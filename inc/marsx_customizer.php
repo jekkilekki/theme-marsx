@@ -16,6 +16,9 @@ function marsx_customize_register( $wp_customize ) {
      */
     $wp_customize->remove_section( 'oblique_theme_info' );
     $wp_customize->remove_setting( 'oblique_color_notice' );
+    $wp_customize->remove_section( 'oblique_pro_featured' );
+    $wp_customize->remove_section( 'oblique_view_pro' );
+    $wp_customize->remove_control( 'oblique_color_notice' );
     
     /**
      * Modify other values in the Customizer
@@ -32,268 +35,259 @@ function marsx_customize_register( $wp_customize ) {
     $wp_customize->get_setting( 'primary_color' )->default = '#f7941d';
     
     /**
+     * Perform some reorganization of default sections
+     */
+    $wp_customize->get_section( 'title_tagline' )->title                = __( 'Site Title / Logo', 'marsx' );
+    $wp_customize->get_section( 'static_front_page' )->title            = __( 'Home Page Settings', 'marsx' );
+    $wp_customize->get_section( 'static_front_page' )->active_callback  = 'is_front_page';
+    $wp_customize->get_section( 'static_front_page' )->priority         = 12;
+    $wp_customize->get_section( 'header_image' )->priority              = 11;
+    $wp_customize->get_section( 'title_tagline' )->priority             = 10;
+    
+    /**
      * Add New stuff to the Customizer
      */
-    // ___Home Page Options___//
-    $wp_customize->add_section(
-            'home_options',
-            array(
-            'title' => __( 'Home Page options', 'marsx' ),
-            'priority' => 10,
-            )
-    );
+    // ___Front Page Options___//
+//    $wp_customize->add_section( 'home_options',
+//            array(
+//                'title'             => __( 'Home Page options', 'marsx' ),
+//                'priority'          => 150,
+//                'active_callback'   => 'is_front_page',
+//            ) );
+    
         /**
          * Add a Featured Headline Area
          */
-        $wp_customize->add_setting(
-                'home_headline',
+        $wp_customize->add_setting( 'home_headline',
                 array(
-                'default'           => __( 'We are MarsX.', 'marsx' ),
-                )
-        );
-        $wp_customize->add_control( 'home_headline', array(
-                'type'        => 'text',
-                'priority'    => 10,
-                'section'     => 'home_options',
-                'label'       => __( 'Home headline', 'marsx' ),
-                'description' => __( 'Put a nice attention-grabbing headline here.', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'home_headline_display',
+                    'default'           => __( 'We are MarsX.', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
+        
+        $wp_customize->add_control( 'home_headline', 
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'home_headline_display', array(
-                'type'      => 'checkbox',
-                'section'   => 'home_options',
-                'label'     => __( 'Display Home page headline?', 'marsx' ),
+                    'type'              => 'text',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Home headline', 'marsx' ),
+                    'description'       => __( 'Put a nice attention-grabbing headline here.', 'marsx' ),
+                ) );
+        
+        $wp_customize->add_setting( 'home_headline_display',
+                array(
+                    'default'           => false,
+                    'sanitize_callback' => 'marsx_sanitize_checkbox',
+                ) );
+        
+        $wp_customize->add_control( 'home_headline_display', 
+                array(
+                    'type'              => 'checkbox',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Display Home page headline?', 'marsx' ),
         ) );
+        
         $wp_customize->add_setting( 'marsx_line' );
         $wp_customize->add_control( new MarsX_Misc_Control( $wp_customize, 'marsx_line' ), array(
-                'section'   => 'home_options',
+                'section'   => 'static_front_page',
                 'type'      => 'line',
         ) );
         
         /**
-         * Add 4 Icon & Intro Text Areas 
+         * Icon Blocks Title + Description
          */
-        $wp_customize->add_setting(
-                'icon_blocks_title',
+        $wp_customize->add_setting( 'icon_blocks_title',
                 array(
-                'default'           => __( 'Featured Icon Blocks Title', 'marsx' ),
-                )
-        );
-        $wp_customize->add_control( 'icon_blocks_title', array(
-                'type'      => 'text',
-                'section'   => 'home_options',
-                'label'     => __( 'Featured Icon Blocks Title', 'marsx' ),
-                'description'   => __( 'Configure a title and description for this section.', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'icon_blocks_desc',
-                array(
-                'default'           => __( 'Featured Icon Blocks Description', 'marsx' ),
-                )
-        );
-        $wp_customize->add_control( 'icon_blocks_desc', array(
-                'type'      => 'textarea',
-                'section'   => 'home_options',
-        ) );
-        $wp_customize->add_setting(
-                'icon_blocks_display',
-                array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'icon_blocks_display', array(
-                'type'      => 'checkbox',
-                'section'   => 'home_options',
-                'label'     => __( 'Display Featured Icon Blocks?', 'marsx' ),
-        ) );
-        // Featured Icon Block One
-        $wp_customize->add_setting(
-                'icon_block_one_icon',
-                array(
-                'default'   => 'gift',
-                )
-        );
-        $wp_customize->add_control( 'icon_block_one_icon', array(
-                'type'      => 'select',
-                'choices'   => array( 'gift', 'charlie' ),
-                'section'   => 'home_options',
-                'label'     => __( 'Block One', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'icon_block_one_content',
-                array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'icon_block_one_content', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Define the icon (above) and content (below).', 'marsx' ),
-        ) );
+                    'default'           => __( 'What we do', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
         
-        // Featured Icon Block Two
-        $wp_customize->add_setting(
-                'icon_block_two_icon',
+        $wp_customize->add_control( 'icon_blocks_title', 
                 array(
-                'default'   => 'gift',
-                )
-        );
-        $wp_customize->add_control( 'icon_block_two_icon', array(
-                'type'      => 'select',
-                'choices'   => array( 'gift', 'charlie' ),
-                'section'   => 'home_options',
-                'label'     => __( 'Block Two', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'icon_block_two_content',
-                array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'icon_block_two_content', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Define the icon (above) and content (below).', 'marsx' ),
-        ) );
+                    'type'              => 'text',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Featured Blocks', 'marsx' ),
+                    'description'       => __( 'Configure a headline and description for this section.', 'marsx' ),
+                ) );
         
-        // Featured Icon Block Three
-        $wp_customize->add_setting(
-                'icon_block_three_icon',
+        $wp_customize->add_setting( 'icon_blocks_desc',
                 array(
-                'default'   => 'gift',
-                )
-        );
-        $wp_customize->add_control( 'icon_block_three_icon', array(
-                'type'      => 'select',
-                'choices'   => array( 'gift', 'charlie' ),
-                'section'   => 'home_options',
-                'label'     => __( 'Block Three', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'icon_block_three_content',
-                array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'icon_block_three_content', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Define the icon (above) and content (below).', 'marsx' ),
-        ) );
+                    'default'           => __( 'Making everything better', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
         
-        // Featured Icon Block Four
-        $wp_customize->add_setting(
-                'icon_block_four_icon',
+        $wp_customize->add_control( 'icon_blocks_desc', 
                 array(
-                'default'   => 'gift',
-                )
-        );
-        $wp_customize->add_control( 'icon_block_four_icon', array(
-                'type'      => 'select',
-                'choices'   => array( 'gift', 'charlie' ),
-                'section'   => 'home_options',
-                'label'     => __( 'Block Four', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'icon_block_four_content',
+                    'type'              => 'textarea',
+                    'section'           => 'static_front_page',
+                ) );
+        
+        $wp_customize->add_setting( 'icon_blocks_display',
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'icon_block_four_content', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Define the icon (above) and content (below).', 'marsx' ),
-        ) );
+                    'default'           => false,
+                    'sanitize_callback' => 'marsx_sanitize_checkbox',
+                ) );
+        
+        $wp_customize->add_control( 'icon_blocks_display', 
+                array(
+                    'type'              => 'checkbox',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Display Featured Blocks?', 'marsx' ),
+                ) );
         
         /**
-         * Add 3 Featured Post Areas
+         * Icon Sections (4)
          */
-        $wp_customize->add_setting(
-                'featured_posts_title',
+        $num_icon_sections = 4;
+        
+        // Create a setting and control for each of the icon sections available in the theme.
+        for ( $i = 1; $i < ( 1 + $num_icon_sections ); $i++ ) {
+                $wp_customize->add_setting( 'icon_block_' . $i . '_icon',
+                        array(
+                            'default'           => 'fa-gift',
+                            'transport'         => 'postMessage',
+                            'sanitize_callback' => 'absint',
+                        ) );
+                
+                $wp_customize->add_control( 'icon_block_' . $i . '_icon', 
+                        array(
+                            /* Translators: %d is the icon block number */
+                            'description'       => sprintf( __( 'Define Icon Block %1$d.<br>For icons, input any <a href="%2$s" target="_blank">Font Awesome icon</a>.', 'marsx' ), $i, 'http://fontawesome.io/icons/' ),
+                            'section'           => 'static_front_page',
+                            'type'              => 'text',
+                            'sanitize_callback' => 'marsx_sanitize_text'
+                        ) );
+                
+                $wp_customize->add_setting( 'icon_block_' . $i . '_content',
+                        array(
+                            'default'           => false,
+                            'transport'         => 'postMessage',
+                        ) );
+                
+                $wp_customize->add_control( 'icon_block_' . $i . '_content', 
+                        array(
+                            'type'              => 'dropdown-pages',
+                            'section'           => 'static_front_page',
+                        ) );
+        }
+        
+        /**
+         * Featured Pages Title + Description
+         */
+        $wp_customize->add_setting( 'featured_pages_title',
                 array(
-                'default'           => __( 'Featured Posts Title', 'marsx' ),
-                )
-        );
-        $wp_customize->add_control( 'featured_posts_title', array(
-                'type'      => 'text',
-                'section'   => 'home_options',
-                'label'     => __( 'Featured Posts Title', 'marsx' ),
-                'description'   => __( 'Configure a title and description for this section.', 'marsx' ),
+                    'default'           => __( 'Features', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
+        
+        $wp_customize->add_control( 'featured_pages_title', 
+                array(
+                    'type'              => 'text',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Featured Pages', 'marsx' ),
+                    'description'       => __( 'Configure a headline and description for this section.', 'marsx' ),
+                ) );
+        
+        $wp_customize->add_setting( 'featured_pages_desc',
+                array(
+                    'default'           => __( 'Check out what we\'re doing', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
+        
+        $wp_customize->add_control( 'featured_pages_desc', 
+                array(
+                    'type'              => 'textarea',
+                    'section'           => 'static_front_page',
+                ) );
+        
+        $wp_customize->add_setting( 'featured_pages_display',
+                array(
+                    'default'           => false,
+                    'sanitize_callback' => 'marsx_sanitize_checkbox',
+                ) );
+        
+        $wp_customize->add_control( 'featured_pages_display', 
+                array(
+                    'type'              => 'checkbox',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Display Featured Pages?', 'marsx' ),
         ) );
-        $wp_customize->add_setting(
-                'featured_posts_desc',
+        
+//        $wp_customize->add_setting(
+//                'featured_posts_category',
+//                array(
+//                'default'   => false,
+//                )
+//        );
+//        $wp_customize->add_control( 'featured_posts_category', array(
+//                'type'      => 'select',
+//                'choices'   => array( 'Uncategorized', 'Other' ),
+//                'section'   => 'home_options',
+//                'label'     => __( 'Featured Post Category (optional)', 'marsx' ),
+//        ) );
+        
+        /**
+         * Featured Pages Areas (3)
+         */
+        $num_f_pages_sections = 3;
+        
+        // Create a setting and control for each of the featured page sections available in the theme.
+        for ( $i = 1; $i < ( 1 + $num_f_pages_sections ); $i++ ) {
+                $wp_customize->add_setting( 'featured_post_' . $i,
+                        array(
+                            'default'           => false,
+                            'sanitize_callback' => 'absint',
+                            'transport'         => 'postMessage',
+                        ) );
+                
+                $wp_customize->add_control( 'featured_post_' . $i, 
+                        array(
+                            /* Translators: %d is the Featured Page number. */
+                            'description'       => sprintf( __( 'Select Featured Page %d.', 'marsx' ), $i ),
+                            'type'              => 'dropdown-pages',
+                            'section'           => 'static_front_page',
+                ) );
+        }
+        
+        /**
+         * Add a Call To Action Area
+         */
+        $wp_customize->add_setting( 'cta_headline',
                 array(
-                'default'           => __( 'Featured Posts Description', 'marsx' ),
-                )
-        );
-        $wp_customize->add_control( 'featured_posts_desc', array(
-                'type'      => 'textarea',
-                'section'   => 'home_options',
-        ) );
-        $wp_customize->add_setting(
-                'featured_posts_display',
+                    'default'           => __( 'Change the world with us!', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
+        
+        $wp_customize->add_control( 'cta_headline', 
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'featured_posts_display', array(
-                'type'      => 'checkbox',
-                'section'   => 'home_options',
-                'label'     => __( 'Display Featured Posts?', 'marsx' ),
-        ) );
-        $wp_customize->add_setting(
-                'featured_posts_category',
+                    'type'              => 'text',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Call to Action', 'marsx' ),
+                    'description'       => __( 'Put a nice attention-grabbing headline here.', 'marsx' ),
+                ) );
+        
+        $wp_customize->add_setting( 'cta_button',
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'featured_posts_category', array(
-                'type'      => 'select',
-                'choices'   => array( 'Uncategorized', 'Other' ),
-                'section'   => 'home_options',
-                'label'     => __( 'Featured Post Category (optional)', 'marsx' ),
-        ) );
-        // Featured Post One
-        $wp_customize->add_setting(
-                'featured_post_one',
+                    'default'           => __( 'Join!', 'marsx' ),
+                    'sanitize_callback' => 'marsx_sanitize_text',
+                ) );
+        
+        $wp_customize->add_control( 'cta_button', 
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'featured_post_one', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Select the first Featured Post.', 'marsx' ),
-        ) );
-        // Featured Post Two
-        $wp_customize->add_setting(
-                'featured_post_two',
+                    'type'              => 'text',
+                    'section'           => 'static_front_page',
+                    'description'       => __( 'Call to Action button text.', 'marsx' ),
+                ) );
+        
+        $wp_customize->add_setting( 'cta_display',
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'featured_post_two', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Select the second Featured Post.', 'marsx' ),
-        ) );
-        // Featured Post Three
-        $wp_customize->add_setting(
-                'featured_post_three',
+                    'default'           => false,
+                    'sanitize_callback' => 'marsx_sanitize_checkbox',
+                ) );
+        
+        $wp_customize->add_control( 'cta_display', 
                 array(
-                'default'   => false,
-                )
-        );
-        $wp_customize->add_control( 'featured_post_three', array(
-                'type'      => 'dropdown-pages',
-                'section'   => 'home_options',
-                'description' => __( 'Select the third Featured Post.', 'marsx' ),
+                    'type'              => 'checkbox',
+                    'section'           => 'static_front_page',
+                    'label'             => __( 'Display Call to Action?', 'marsx' ),
         ) );
 
 }
@@ -335,6 +329,21 @@ function marsx_sanitize_checkbox( $input ) {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function marsx_customize_preview_js() {
+    
+        /* Dequeue Oblique Theme Info scripts and styles */
+        wp_dequeue_script( 'customizer-info-js' );
+        wp_dequeue_style( 'customizer-info-style' );
+        
+        /* Load Customizer functions from Parent Theme (Oblique) */
 	wp_enqueue_script( 'marsx_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130508', true );
+        
 }
 add_action( 'customize_preview_init', 'marsx_customize_preview_js' );
+
+function marsx_customizer_control() {
+    
+    /* MarsX Customizer controller script */
+    wp_enqueue_script( 'marsx_customizer_control', get_stylesheet_directory_uri() . '/js/customizer-control.js', array( 'jquery' ), '20161208', true );
+    
+}
+add_action( 'customize_controls_print_footer_scripts', 'marsx_customizer_control' );
