@@ -12,6 +12,55 @@
  * Text Domain: marsx
  */
 
+/**
+ * Reset - to MarsX defaults (orange and Fira Sans + Play fonts)
+ */
+body {
+    background-color: #282828;
+    font-family: "Fira Sans", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Play", sans-serif;
+}
+.svg-block {
+    fill: #282828!important;
+}
+/* Logo positioning reset */
+.site-branding {
+    padding: 200px 0!important;
+}
+/* Color reset */
+a,
+.widget-area a:hover,
+.entry-title a:hover,
+.entry-meta a:hover,
+.social-navigation li a:hover {
+    color: #f7941d;
+}
+button,
+.button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.nav-previous:hover,
+.nav-next:hover,
+.read-more {
+    background-color: #f7941d;
+}
+/* Opacity */
+.entry-thumb:after {
+    background-color: rgba(247, 148, 29, 0.4);
+}
+
+
+/**
+ * New styles
+ */
 .clearfix {
     clear: both;
     display: block;
@@ -74,6 +123,7 @@
 }
 .grid-layout {
     margin:auto;
+    display: block;
 }
 
 /**
@@ -109,4 +159,32 @@
 .social-navigation {
     float: right;
     margin-left: 2em;
+}
+
+/**
+ * Paginate Links
+ */
+.page-numbers {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.page-numbers li {
+    list-style: none;
+    display: inline-block;
+    max-width: 50%;
+    padding: 15px;
+    margin: 0 2px;
+    background-color: #17191b;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+.page-numbers a {
+    color: #f7941d;
+}
+.page-numbers li:hover {
+    background: #f7941d;
+}
+.page-numbers li:hover a {
+    color: white;
 }

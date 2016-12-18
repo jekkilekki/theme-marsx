@@ -31,7 +31,7 @@ function marsx_customize_register( $wp_customize ) {
     $wp_customize->get_setting( 'body_font_family' )->default = '\'Fira Sans\', sans-serif';
     $wp_customize->get_setting( 'headings_font_name' )->default = 'Play';
     $wp_customize->get_setting( 'headings_font_family' )->default = '\'Play\', sans-serif';
-    // $wp_customize->get_setting( '' )->default = '#181c1f'; // SpaceX background color
+    $wp_customize->get_setting( 'background_color' )->default = '#282828'; // #181c1f SpaceX background color
     $wp_customize->get_setting( 'primary_color' )->default = '#f7941d';
     
     /**
@@ -307,7 +307,7 @@ function marsx_sanitize_text( $input ) {
 function marsx_sanitize_logo_style( $input ) {
 	$valid = array(
 				'hide-title'  => __( 'Only logo', 'marsx' ),
-				'show-title'  => __( 'Logo plus site title&amp;description', 'marsx' ),
+				'show-title'  => __( 'Logo plus site title &amp; description', 'marsx' ),
 			);
 	if ( array_key_exists( $input, $valid ) ) {
 		return $input;
