@@ -27,8 +27,11 @@ h5,
 h6 {
     font-family: "Play", sans-serif;
 }
-.svg-block {
-    fill: #282828!important;
+header .svg-block,
+.nav-svg.svg-block,
+.post-svg.svg-block,
+.post-bottom-svg.svg-block {
+    fill: #282828;
 }
 /* Logo positioning reset */
 .site-branding {
@@ -55,6 +58,11 @@ input[type="submit"],
 /* Opacity */
 .entry-thumb:after {
     background-color: rgba(247, 148, 29, 0.4);
+}
+
+.social-navigation {
+    float: none!important;
+    width: 100%;
 }
 
 
@@ -124,6 +132,33 @@ input[type="submit"],
 .grid-layout {
     margin:auto;
     display: block;
+}
+
+/**
+ * Front page extras
+ */
+#front-page-extras h1,
+#front-page-extras p,
+.front-page-headline,
+.front-page-section {
+    text-align: center;
+}
+.front-page-headline {
+    background: white;
+    padding: 1em;
+}
+.front-page-headline h1 {
+    margin: 0;
+    padding: 0;
+}
+.front-page-section {
+    max-width: 75%;
+    margin: 0 auto;
+    display: inline-block;
+    background: black;
+}
+.front-page-section h1 {
+    color: white;
 }
 
 /**

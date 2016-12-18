@@ -20,6 +20,18 @@ function marsx_setup_theme() {
 add_action( 'after_setup_theme', 'marsx_setup_theme' );
 
 /**
+ * Register default header image
+ */
+register_default_headers( array(
+	'mars' => array(
+		'url'           => '%2$s/images/marsx-header.jpg',
+		'thumbnail_url' => '%2$s/images/marsx-thumbnail.jpg',
+		'description'   => __( 'Mars', 'marsx' )
+                )
+	)
+);
+
+/**
  * Remove old masonry init
  */
 function marsx_print_scripts() {

@@ -231,14 +231,14 @@ function marsx_customize_register( $wp_customize ) {
         
         // Create a setting and control for each of the featured page sections available in the theme.
         for ( $i = 1; $i < ( 1 + $num_f_pages_sections ); $i++ ) {
-                $wp_customize->add_setting( 'featured_post_' . $i,
+                $wp_customize->add_setting( 'featured_page_' . $i,
                         array(
                             'default'           => false,
                             'sanitize_callback' => 'absint',
                             'transport'         => 'postMessage',
                         ) );
                 
-                $wp_customize->add_control( 'featured_post_' . $i, 
+                $wp_customize->add_control( 'featured_page_' . $i, 
                         array(
                             /* Translators: %d is the Featured Page number. */
                             'description'       => sprintf( __( 'Select Featured Page %d.', 'marsx' ), $i ),
