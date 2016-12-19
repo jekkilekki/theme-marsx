@@ -37,6 +37,9 @@
 	</div>
 
 	<div class="top-bar container">
+                <nav id="site-navigation" class="main-navigation full-navigation-menu" role="navigation">
+                    <?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'depth' => 1 ) ); ?>
+                </nav><!-- #site-navigation -->
 		<?php if ( has_nav_menu( 'social' ) ) : ?>
 			<nav class="social-navigation clearfix">
 				<?php wp_nav_menu( array( 'theme_location' => 'social', 'link_before' => '<span class="screen-reader-text">', 'link_after' => '</span>', 'menu_class' => 'menu clearfix', 'fallback_cb' => false ) ); ?>
@@ -71,10 +74,30 @@
 				<?php endif; ?>
 			</div><!-- .site-branding -->
 		</div>
+                <?php if ( get_theme_mod( 'home_headline_display', false ) && is_front_page() && get_option( 'show_on_front' ) == 'page' ) : ?>
+                    <style> .header-svg.svg-block { fill: white; } </style>
+                <?php elseif ( get_theme_mod( 'icon_blocks_display', false ) && is_front_page() && get_option( 'show_on_front' ) == 'page' ) : ?>
+                    <style> .header-svg.svg-block { fill: black; } </style>
+                <?php elseif ( get_theme_mod( 'featured_pages_display', false ) && is_front_page() && get_option( 'show_on_front' ) == 'page' ) : ?>
+                    <style> .header-svg.svg-block { fill: #282828; } </style>
+                <?php elseif ( get_theme_mod( 'cta_display', false ) && is_front_page() && get_option( 'show_on_front' ) == 'page' ) : ?>
+                    <style> .header-svg.svg-block { fill: white; } </style>
+                <?php endif; ?>
 		<div class="svg-container header-svg svg-block">
 			<?php oblique_svg_1(); ?>
 		</div>		
 	</header><!-- #masthead -->
+        
+        <?php
+        /**
+         * Custom Front Page functions
+         */
+        // If this is the Front Page AND we've set it to display a Static Front Page
+        // Other option, get_option( 'show_on_front' ) == 'posts' means "Your Latest Posts"
+        if ( is_front_page() && get_option( 'show_on_front' ) == 'page' ) :
+            get_template_part( 'content', 'front-page' );
+        endif;
+        ?>
 
 	<div id="content" class="site-content">
 		<div class="container content-wrapper">

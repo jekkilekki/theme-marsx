@@ -143,7 +143,6 @@ function marsx_customize_register( $wp_customize ) {
                 $wp_customize->add_setting( 'icon_block_' . $i . '_icon',
                         array(
                             'default'           => 'fa-gift',
-                            'transport'         => 'postMessage',
                             'sanitize_callback' => 'absint',
                         ) );
                 
@@ -159,7 +158,6 @@ function marsx_customize_register( $wp_customize ) {
                 $wp_customize->add_setting( 'icon_block_' . $i . '_content',
                         array(
                             'default'           => false,
-                            'transport'         => 'postMessage',
                         ) );
                 
                 $wp_customize->add_control( 'icon_block_' . $i . '_content', 
@@ -235,7 +233,6 @@ function marsx_customize_register( $wp_customize ) {
                         array(
                             'default'           => false,
                             'sanitize_callback' => 'absint',
-                            'transport'         => 'postMessage',
                         ) );
                 
                 $wp_customize->add_control( 'featured_page_' . $i, 
@@ -275,6 +272,18 @@ function marsx_customize_register( $wp_customize ) {
                     'type'              => 'text',
                     'section'           => 'static_front_page',
                     'description'       => __( 'Call to Action button text.', 'marsx' ),
+                ) );
+        
+        $wp_customize->add_control( 'cta_button_dest',
+                array(
+                    'default'           => false,
+                ) );
+        
+        $wp_customize->add_control( 'cta_button_dest',
+                array(
+                    'type'              => 'dropdown-pages',
+                    'section'           => 'static_front_page',
+                    'description'       => __( 'Select the Page for the Call to Action button to link to.', 'marsx' ),
                 ) );
         
         $wp_customize->add_setting( 'cta_display',

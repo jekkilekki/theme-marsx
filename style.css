@@ -135,13 +135,56 @@ input[type="submit"],
 }
 
 /**
+ * Full Navigation Menu 
+ */
+.sidebar-nav {
+    display: none;
+}
+.full-navigation-menu {
+    display: block;
+    margin-top: 10px;
+}
+.full-navigation-menu li {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.8em!important;
+    margin-left: 10px;
+}
+.full-navigation-menu li a {
+    color: #d9d9d9;
+}
+@media screen and ( max-width: 1060px ) {
+    .sidebar-nav {
+        display: block!important;
+    }
+    .full-navigation-menu {
+        display: none!important;
+    }
+}
+
+/**
  * Front page extras
  */
+#front-page-extras {
+    margin-top: -45px;
+    margin-bottom: 45px;
+    color: #9d9d9d;
+}
+#front-page-extras .single-svg-bottom {
+    margin-bottom: 0!important;
+}
 #front-page-extras h1,
 #front-page-extras p,
 .front-page-headline,
 .front-page-section {
     text-align: center;
+}
+.front-page-container {
+    width: 100%;
+}
+/* Front-Page Headline */
+.front-page-headline-container .svg-block {
+    fill: white!important;
 }
 .front-page-headline {
     background: white;
@@ -150,15 +193,51 @@ input[type="submit"],
 .front-page-headline h1 {
     margin: 0;
     padding: 0;
+    font-size: 2.5em;
 }
-.front-page-section {
+/* Front-Page Blocks */
+.front-icons-svg.svg-block {
+    fill: black!important;
+    background: #282828;
+}
+.front-page-icon-block-container {
+    display: flex;
+    margin-bottom: 45px;
+}
+.front-page-icon-block-container.grid-layout {
+    margin-bottom: 0;
+}
+.front-page-icon-block,
+.front-page-feature {
+    flex-grow: 1;
+    flex-basis: 25%;
     max-width: 75%;
     margin: 0 auto;
-    display: inline-block;
+}
+/* Front-Page Features */
+.front-page-section-container .svg-block {
+    fill: #282828!important;
+}
+.icon-blocks-container {
+    margin: 0 auto;
     background: black;
 }
+.featured-pages-container {
+    margin: 0 auto;
+    background: #282828;
+}
 .front-page-section h1 {
-    color: white;
+    color: #dddddd;
+}
+.front-page-section h3 {
+    color: #9d9d9d;
+}
+.featured-pages-container h3 {
+    margin-bottom: 65px;
+}
+/* Front-Page Call to Action */
+.front-page-cta-container .svg-block {
+    /*fill: black!important;*/
 }
 
 /**
