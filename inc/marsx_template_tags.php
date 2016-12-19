@@ -80,7 +80,7 @@ function marsx_footer_credits()
        '<a href="https://github.com/jekkilekki/theme-marsx" target="_blank" rel="nofollow">MarsX</a>'
     );
 }
-add_action('marsx_child_footer', 'marsx_footer_credits');
+add_action( 'marsx_child_footer', 'marsx_footer_credits' );
 
 
 

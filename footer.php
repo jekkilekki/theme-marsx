@@ -13,8 +13,13 @@
 		<?php oblique_svg_1(); ?>
 	</div>
 	<footer id="colophon" class="site-footer" role="contentinfo">
+                <?php if ( has_nav_menu( 'social' ) ) : ?>
+			<nav class="social-navigation clearfix">
+				<?php wp_nav_menu( array( 'theme_location' => 'social', 'link_before' => '<span class="screen-reader-text">', 'link_after' => '</span>', 'menu_class' => 'menu clearfix', 'fallback_cb' => false ) ); ?>
+			</nav>
+		<?php endif; ?>
 		<div class="site-info container">
-			<?php do_action('oblique_child_footer'); ?>
+			<?php do_action('marsx_child_footer'); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

@@ -6,6 +6,12 @@
 <div id="front-page-extras">
 
         <?php 
+        $setHeadline = __( 'Set headline in Customizer', 'marsx' );
+        $setTitle = __( 'Set title in Customizer.', 'marsx' );
+        $setDesc = __( 'Set description in Customizer.', 'marsx' );
+        $setCta = __( 'Set Call to Action in Customizer.', 'marsx' );
+        $setButton = __( 'Call to Action', 'marsx' );
+        
         /**
          * Front Page Headline
          */
@@ -14,7 +20,7 @@
             <?php // We are NOT using an svg-block here so that the headline lines up perfectly with the header image ?>
             <div class="front-page-headline">
                 <div class="container content-wrapper">
-                    <h1><?php echo get_theme_mod( 'home_headline' ); ?></h1>
+                    <h1><?php echo get_theme_mod( 'home_headline', $setHeadline ); ?></h1>
                 </div>
             </div>
             
@@ -47,8 +53,8 @@
             <?php // We are NOT using an svg-block here so that the headline lines up perfectly with the header image ?>
             <div class="front-page-section">
                 <div class="container content-wrapper">
-                    <h1><?php echo get_theme_mod( 'icon_blocks_title' ); ?></h1>
-                    <h3><?php echo get_theme_mod( 'icon_blocks_desc' ); ?></h3>
+                    <h1><?php echo get_theme_mod( 'icon_blocks_title', $setTitle ); ?></h1>
+                    <h3><?php echo get_theme_mod( 'icon_blocks_desc', $setDesc ); ?></h3>
 
                     <?php 
                     if ( get_theme_mod( 'icon_block_1_content' ) || get_theme_mod( 'icon_block_2_content' ) || get_theme_mod( 'icon_block_3_content' ) || get_theme_mod( 'icon_block_4_content' ) ) : ?>
@@ -122,8 +128,8 @@
             <?php // We are NOT using an svg-block here so that the headline lines up perfectly with the header image ?>
             <div class="front-page-section">
                 <div class="container content-wrapper">
-                    <h1><?php echo get_theme_mod( 'featured_pages_title' ); ?></h1>
-                    <h3><?php echo get_theme_mod( 'featured_pages_desc' ); ?></h3>
+                    <h1><?php echo get_theme_mod( 'featured_pages_title', $setTitle ); ?></h1>
+                    <h3><?php echo get_theme_mod( 'featured_pages_desc', $setDesc ); ?></h3>
 
                     <?php 
                     if ( get_theme_mod( 'featured_page_1' ) || get_theme_mod( 'featured_page_2' ) || get_theme_mod( 'featured_page_3' ) ) : ?>
@@ -192,8 +198,8 @@
             <?php // We are NOT using an svg-block here so that the headline lines up perfectly with the header image ?>
             <div class="front-page-headline">
                 <div class="container content-wrapper">
-                    <h1><?php echo get_theme_mod( 'cta_headline' ); ?></h1>
-                    <a class="button"><?php echo get_theme_mod( 'cta_button' ); ?></a>
+                    <h1><?php echo get_theme_mod( 'cta_headline', $setCta ); ?></h1>
+                    <a class="button" href="#"><?php echo get_theme_mod( 'cta_button', $setButton ); ?></a>
                 </div>
             </div>
             
