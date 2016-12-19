@@ -71,7 +71,9 @@
 
                             <div class="front-page-icon-block">
                                 <div class="front-page-icon">
+                                    <a href="<?php esc_url( the_permalink() ); ?>">
                                     <i class="fa fa-3x <?php echo get_theme_mod( 'icon_block_' . $i . '_icon' ); ?>"></i>
+                                    </a>
                                 </div>
                                 <div class="front-page-block">
                                     <p>

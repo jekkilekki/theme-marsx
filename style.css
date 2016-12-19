@@ -196,6 +196,9 @@ footer .social-navigation {
 .front-page-icon {
     margin-top: 2em;
 }
+.front-page-icon a {
+    color: #dddddd;
+}
 .front-page-block {
     padding: 1em;
 }
