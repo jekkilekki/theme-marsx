@@ -43,5 +43,5 @@ function new_wp_trim_excerpt($text)
     return apply_filters('new_wp_trim_excerpt', $text, $raw_excerpt);
 }
 
-remove_filter('get_the_excerpt', 'wp_trim_excerpt');
-add_filter('get_the_excerpt', 'new_wp_trim_excerpt');
+//remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+//add_filter('get_the_excerpt', 'new_wp_trim_excerpt');
