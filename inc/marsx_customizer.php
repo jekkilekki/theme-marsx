@@ -146,25 +146,25 @@ function marsx_customize_register( $wp_customize ) {
         $wp_customize->add_setting( 'icon_block_1_icon',
                         array(
                             'default'           => 'fa-space-shuttle',
-                            'sanitize_callback' => 'absint',
+                            'sanitize_callback' => 'marsx_sanitize_text',
                         ) );
         
         $wp_customize->add_setting( 'icon_block_2_icon',
                         array(
                             'default'           => 'fa-bolt',
-                            'sanitize_callback' => 'absint',
+                            'sanitize_callback' => 'marsx_sanitize_text',
                         ) );
         
         $wp_customize->add_setting( 'icon_block_3_icon',
                         array(
                             'default'           => 'fa-hand-spock-o',
-                            'sanitize_callback' => 'absint',
+                            'sanitize_callback' => 'marsx_sanitize_text',
                         ) );
         
         $wp_customize->add_setting( 'icon_block_4_icon',
                         array(
                             'default'           => 'fa-flag-checkered',
-                            'sanitize_callback' => 'absint',
+                            'sanitize_callback' => 'marsx_sanitize_text',
                         ) );
         
         // Create a setting and control for each of the icon sections available in the theme.
