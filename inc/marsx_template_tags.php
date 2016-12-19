@@ -25,7 +25,7 @@
         }
         $output = $copyright . " " . $blog_name;
     }
-    return $output;
+    echo $output;
 }
 
 /**

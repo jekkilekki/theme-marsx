@@ -180,6 +180,9 @@
                         <?php if ( get_theme_mod( 'cta_display', false ) ) : ?>
                         background: white;
                         <?php endif; ?>
+                        <?php if ( ! get_theme_mod( 'cta_display', false ) ) : ?>
+                        margin-top: -45px;
+                        <?php endif; ?>
                     } 
                 </style>
             
@@ -199,7 +202,30 @@
             <div class="front-page-headline">
                 <div class="container content-wrapper">
                     <h1><?php echo get_theme_mod( 'cta_headline', $setCta ); ?></h1>
-                    <a class="button" href="#"><?php echo get_theme_mod( 'cta_button', $setButton ); ?></a>
+                    <?php
+                    $ctaId = get_theme_mod( 'cta_button_dest' );
+
+                    // If a Page has been selected for content, only then show the icon block
+                    if ( $ctaId ) : 
+                        
+                        // WP Query for this Page
+                        $query = new WP_Query( 'page_id=' . $ctaId );
+                        if ( $query->have_posts() ) : 
+                            while ( $query->have_posts() ) : $query->the_post(); ?>
+
+                                <a class="button" href="<?php esc_url( the_permalink() ); ?>">
+                                    <?php echo get_theme_mod( 'cta_button', $setButton ); ?>
+                                </a>
+
+                            <?php
+                            endwhile;
+                        endif;
+                    endif; 
+
+                    // Reset our post data
+                    wp_reset_postdata();
+                    ?>
+                    
                 </div>
             </div>
             

@@ -25,8 +25,13 @@ function marsx_customize_register( $wp_customize ) {
      */
     $wp_customize->get_setting( 'logo_size' )->default = '300';
     $wp_customize->get_control( 'logo_size' )->description = __( 'Max-width for the logo. Default 300px', 'marsx' );
+    $wp_customize->get_control( 'logo_style' )->choices = array(
+				'hide-title'  => __( 'Only logo', 'marsx' ),
+				'show-title'  => __( 'Logo plus site title &amp; description', 'marsx' ),
+			);
     $wp_customize->get_setting( 'branding_padding' )->default = '200';
-    $wp_customize->get_control( 'branding_padding' )->description = __( 'Top&amp;bottom padding for the branding. Default: 200px', 'marsx' );
+    $wp_customize->get_control( 'branding_padding' )->description = __( 'Top &amp; bottom padding for the branding. Default: 200px', 'marsx' );
+    $wp_customize->get_control( 'branding_padding_1024' )->description = __( 'Top &amp; bottom padding for the branding. Default: 100px', 'marsx' );
     $wp_customize->get_setting( 'body_font_name' )->default = 'Fira+Sans:400italic,700italic,400,700';
     $wp_customize->get_setting( 'body_font_family' )->default = '\'Fira Sans\', sans-serif';
     $wp_customize->get_setting( 'headings_font_name' )->default = 'Play';
@@ -138,14 +143,32 @@ function marsx_customize_register( $wp_customize ) {
          */
         $num_icon_sections = 4;
         
-        // Create a setting and control for each of the icon sections available in the theme.
-        for ( $i = 1; $i < ( 1 + $num_icon_sections ); $i++ ) {
-                $wp_customize->add_setting( 'icon_block_' . $i . '_icon',
+        $wp_customize->add_setting( 'icon_block_1_icon',
                         array(
-                            'default'           => 'fa-gift',
+                            'default'           => 'fa-space-shuttle',
                             'sanitize_callback' => 'absint',
                         ) );
-                
+        
+        $wp_customize->add_setting( 'icon_block_2_icon',
+                        array(
+                            'default'           => 'fa-bolt',
+                            'sanitize_callback' => 'absint',
+                        ) );
+        
+        $wp_customize->add_setting( 'icon_block_3_icon',
+                        array(
+                            'default'           => 'fa-hand-spock-o',
+                            'sanitize_callback' => 'absint',
+                        ) );
+        
+        $wp_customize->add_setting( 'icon_block_4_icon',
+                        array(
+                            'default'           => 'fa-flag-checkered',
+                            'sanitize_callback' => 'absint',
+                        ) );
+        
+        // Create a setting and control for each of the icon sections available in the theme.
+        for ( $i = 1; $i < ( 1 + $num_icon_sections ); $i++ ) {
                 $wp_customize->add_control( 'icon_block_' . $i . '_icon', 
                         array(
                             /* Translators: %d is the icon block number */
@@ -274,7 +297,7 @@ function marsx_customize_register( $wp_customize ) {
                     'description'       => __( 'Call to Action button text.', 'marsx' ),
                 ) );
         
-        $wp_customize->add_control( 'cta_button_dest',
+        $wp_customize->add_setting( 'cta_button_dest',
                 array(
                     'default'           => false,
                 ) );

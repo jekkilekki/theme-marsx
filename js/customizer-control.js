@@ -8,22 +8,22 @@
 jQuery( document ).ready( function ($) {
 
 	/* Customizer sections */
-        var static_home = $( '#sub-accordion-section-static_front_page li:not(nth-child(1)):not(nth-child(2))' );
+        // var static_home = $( '#sub-accordion-section-static_front_page li:not(nth-child(1)):not(nth-child(2))' );
 	var icon_blocks = $( '#customize-control-icon_block_1_icon, #customize-control-icon_block_2_icon, #customize-control-icon_block_3_icon, #customize-control-icon_block_4_icon, #customize-control-icon_block_1_content, #customize-control-icon_block_2_content, #customize-control-icon_block_3_content, #customize-control-icon_block_4_content' );
-        var feat_pages = $( '#customize-control-featured_post_1, #customize-control-featured_post_2, #customize-control-featured_post_3');
+        var feat_pages = $( '#customize-control-featured_page_1, #customize-control-featured_page_2, #customize-control-featured_page_3');
 
         /* On page load, hide or show the rest of the Front Page Options */
-	if ( $( '#customize-control-icon_blocks_display input' ).prop( "checked" ) ) {
-		static_home.show();
-	} else {
-		static_home.hide();
-	}
-        /* On page load, hide or the rest of the Front Page Options */
-	if ( $( '#customize-control-featured_pages_display input' ).prop( "checked" ) ) {
-		static_home.show();
-	} else {
-		static_home.hide();
-	}
+//	if ( $( '#customize-control-icon_blocks_display input' ).prop( "checked" ) ) {
+//		static_home.show();
+//	} else {
+//		static_home.hide();
+//	}
+//        /* On page load, hide or the rest of the Front Page Options */
+//	if ( $( '#customize-control-featured_pages_display input' ).prop( "checked" ) ) {
+//		static_home.show();
+//	} else {
+//		static_home.hide();
+//	}
 
 	/* On page load, hide or show Icon Blocks */
 	if ( $( '#customize-control-icon_blocks_display input' ).prop( "checked" ) ) {

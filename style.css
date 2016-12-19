@@ -1,17 +1,17 @@
 /**
  * Theme Name: MarsX
  * Theme URI: https://github.com/jekkilekki/theme-marsx
- * Description: Oblique Child Theme
+ * Description: Oblique Child Theme that includes specialized Customizer options for a unique Front Page design.
  * Author: Aaron Snowberger
  * Author URI: http://aaronsnowberger.com
  * Template: oblique
- * Version: 1.0.0
+ * Version: 1.0.1
  * License: GPLv2 or later
  * License URL: http://www.gnu.org/licenses/gpl-2.0.html
  * Tags: responsive-layout
  * Text Domain: marsx
- * GitHub Theme URI:   https://github.com/jekkilekki/theme-marsx
- * GitHub Branch:      master
+ * GitHub Theme URI: https://github.com/jekkilekki/theme-marsx
+ * GitHub Branch: master
  */
 
 /**
@@ -39,6 +39,9 @@ header .svg-block,
 .site-branding {
     padding: 200px 0!important;
 }
+.site-logo {
+    max-width: 300px!important;
+}
 /* Color reset */
 a,
 .widget-area a:hover,
@@ -62,9 +65,18 @@ input[type="submit"],
     background-color: rgba(247, 148, 29, 0.4);
 }
 
-.social-navigation {
+header .social-navigation {
     float: none!important;
     width: 100%;
+}
+/**
+ * Inline search field in header
+ */
+footer .social-navigation {
+    float: right;
+    margin-left: 2em;
+    margin-top: -10px;
+    width: auto;
 }
 
 
@@ -169,17 +181,23 @@ input[type="submit"],
  */
 #front-page-extras {
     margin-top: -45px;
-    margin-bottom: 45px;
+    /*margin-bottom: 45px;*/
     color: #9d9d9d;
 }
 #front-page-extras .single-svg-bottom {
     margin-bottom: 0!important;
 }
 #front-page-extras h1,
-#front-page-extras p,
+#front-page-extras h3,
 .front-page-headline,
-.front-page-section {
+.front-page-icon {
     text-align: center;
+}
+.front-page-icon {
+    margin-top: 2em;
+}
+.front-page-block {
+    padding: 1em;
 }
 .front-page-container {
     width: 100%;
@@ -273,13 +291,10 @@ input[type="submit"],
     width: 100%;
     box-sizing: border-box;
 }
-
-/**
- * Inline search field in header
- */
-.social-navigation {
-    float: right;
-    margin-left: 2em;
+.widget {
+    font-size: 0.9em;
+    font-weight: 100;
+    color: #9d9d9d;
 }
 
 /**

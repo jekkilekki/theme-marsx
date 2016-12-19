@@ -42,6 +42,12 @@ function marsx_print_scripts() {
  */
 function marsx_scripts() {
     wp_enqueue_script( 'marsx-masonry-init', get_stylesheet_directory_uri() . '/js/masonry-init.js', array( 'jquery-masonry' ), '20161218', true );
+    
+    /*
+     * Remove old Font Awesome (4.3.0) and add new Font Awesome (4.7)
+     */
+    wp_dequeue_style( 'oblique-font-awesome' );
+    wp_enqueue_style( 'marsx-font-awesome', get_stylesheet_directory_uri() . '/fonts/font-awesome.min.css' );
 }
 add_action( 'wp_print_scripts', 'marsx_print_scripts' );
 add_action( 'wp_enqueue_scripts', 'marsx_scripts' );
